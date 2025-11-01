@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"math"
 	"math/bits"
+	"os"
 	"time"
 )
 
@@ -30,6 +31,7 @@ func lesson1() {
 		fmt.Printf("inserted block %v - %0x\n", i, blockHash)
 		previousBlockHash = blockHash
 	}
+	wait()
 
 	// Lesson 1.1 - Print blockchain
 	lastBlockHash := previousBlockHash
@@ -116,6 +118,7 @@ func lesson3() {
 		encodedBlockHeader := block.Header.Encode()
 		blockHash = sha256.Sum256(encodedBlockHeader[:])
 		x := binary.BigEndian.Uint64(blockHash[0:8])
+		// XXX Replace endian with hand rolled encoders?
 		if bits.LeadingZeros64(x) >= int(block.Header.Difficulty) {
 			break
 		}
@@ -177,7 +180,7 @@ func broadcast(blockchain map[[32]byte]Block, addresses map[[20]byte]uint32, blo
 	}
 }
 
-func main() {
+func lesson4() {
 	alice := [20]byte{'a', 'l', 'i', 'c', 'e'}
 	bob := [20]byte{'b', 'o', 'b'}
 
@@ -214,5 +217,25 @@ func main() {
 		fmt.Printf("mined block %v - %x alice balance %v bob balance %v\n", i,
 			*blockHash, addresses[alice], addresses[bob])
 		previousBlockHash = *blockHash
+	}
+}
+
+func _main() error {
+	if len(os.Args) < 2 {
+		return fmt.Errorf("must provide lesson")
+	}
+
+	switch os.Args[1] {
+	case "lesson1":
+		lesson1()
+	}
+
+	return nil
+}
+
+func main() {
+	if err := _main(); err != nil {
+		fmt.Fprintf(os.Stderr, "%v\n", err)
+		os.Exit(1)
 	}
 }
