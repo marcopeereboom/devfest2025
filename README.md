@@ -135,5 +135,5 @@ mined block 8 - 000000cb6f6e86e0b0b8f320111cde75ad4d637c9f26b704b8a7e0496bf36a1e
 mined block 9 - 0000004038f9cd37e745a7e14ca70c100b792c00db5010bf12cfda53735fd9c7 alice balance 400 bob balance 100
 ```
 
-This examples, in spirit, shows how bitcoin progresses through the state machine
+This example, in spirit, shows how bitcoin progresses through the state machine
 all the way through broadcasting a block.
