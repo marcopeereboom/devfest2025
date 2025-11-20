@@ -27,7 +27,7 @@ func main() {
 	for i := 0; i < blocks; i++ {
 		block := bitcoin.Block{
 			Header: bitcoin.BlockHeader{
-				PreviousBlockHash: previousBlockHash,
+				PreviousBlockHash: previousBlockHash, // This is the link!
 			},
 			Transactions: []bitcoin.Transaction{},
 		}
