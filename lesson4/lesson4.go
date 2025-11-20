@@ -32,8 +32,7 @@ func mineBlock(block *bitcoin.Block, rewardAddress [20]byte, transactions []bitc
 		To:     rewardAddress,
 		Amount: 50,
 	}}, transactions...)
-	block.Header.MerkleRoot = block.CalculateMerkle()
-
+	block.Header.MerkleRoot = block.CalculateMerkle() // This links header and block
 	var blockHash [32]byte
 	for i := uint32(0); i < math.MaxUint32; i++ {
 		block.Header.Nonce = i
