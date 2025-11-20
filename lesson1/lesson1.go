@@ -23,7 +23,7 @@ var (
 
 func main() {
 	// Lesson 1 - Stack em!
-	previousBlockHash := genesisHash
+	previousBlockHash := genesisHash // last inserted block hash
 	for i := 0; i < blocks; i++ {
 		block := bitcoin.Block{
 			Header: bitcoin.BlockHeader{
@@ -39,7 +39,7 @@ func main() {
 	wait()
 
 	// Lesson 1.1 - Print blockchain
-	lastBlockHash := previousBlockHash
+	lastBlockHash := previousBlockHash // walk chain backwards to genesis
 	for height := blocks - 1; !bytes.Equal(lastBlockHash[:], genesisHash[:]); height-- {
 		block := blockchain[lastBlockHash]
 		fmt.Printf("block %v - %0x\n", height, sha256.Sum256(block.Encode()))
